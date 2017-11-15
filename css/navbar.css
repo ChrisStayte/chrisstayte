@@ -1,0 +1,56 @@
+/* Affix Navbar */
+
+.navbar {
+    margin-bottom: 40px;
+    border-radius: 0;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+.affix {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+}
+
+/* fixed to top styles */
+
+.affix.navbar {
+    background-color: #563D7C;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+.affix.navbar .nav-item>a,
+.affix.navbar .navbar-brand,
+button {
+    color: #fff;
+}
+
+/* navbar collapsing */
+
+@media(max-width:34em) {
+    .navbar .navbar-nav>.nav-item {
+        float: none;
+        margin-left: .1rem;
+    }
+    .navbar .navbar-nav {
+        float: none !important;
+    }
+    .navbar .collapse.in,
+    .navbar .collapsing {
+        clear: both;
+    }
+}
+button:focus {
+    outline: none;
+}
+.brand-color {
+    color: #563D7C
+}
+
+/** maintain button visibility **/
+nav {
+    min-height: 56px;
+}

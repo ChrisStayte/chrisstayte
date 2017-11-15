@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+<url>
+  <loc>http://chrisstayte.com/</loc>
+  <lastmod>2017-03-06T00:45:18+00:00</lastmod>
+</url>
+<url>
+  <loc>http://chrisstayte.com/projects/</loc>
+  <lastmod>2017-03-06T00:57:03+00:00</lastmod>
+</url>
+<url>
+  <loc>http://chrisstayte.com/contactme/</loc>
+</url>
+<url>
+  <loc>http://chrisstayte.com/projects/photocollector/</loc>
+  <lastmod>2017-03-06T00:45:20+00:00</lastmod>
+</url>
+<url>
+  <loc>http://chrisstayte.com/projects/arcmaptogoogleearth/</loc>
+  <lastmod>2017-03-06T00:45:19+00:00</lastmod>
+</url>
+<url>
+  <loc>http://chrisstayte.com/projects/unitconverter/</loc>
+  <lastmod>2017-03-06T00:45:21+00:00</lastmod>
+</url>
+<url>
+  <loc>http://chrisstayte.com/projects/weatherscraper/</loc>
+</url>
+<url>
+  <loc>http://chrisstayte.com/projects/codeground/</loc>
+  <lastmod>2017-03-06T00:45:19+00:00</lastmod>
+</url>
+<url>
+  <loc>http://chrisstayte.com/projects/reactiontime/</loc>
+  <lastmod>2017-03-06T00:45:20+00:00</lastmod>
+</url>
+</urlset>

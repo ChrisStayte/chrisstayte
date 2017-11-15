@@ -1,0 +1,249 @@
+<?php
+   	$error = '';
+    $success = '';
+	if ($_POST) {
+    	$error = '';
+    	$success = '';
+        
+    	if(!$_POST['email']) {
+        	$error .="The Email Field Is Required</br>";
+	    } else if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) === false) {
+    	    $error .="The Email Address Is Not Valid</br>";
+	    }
+    
+    
+    	if(!$_POST['subject']) {
+        	$error .="The Subject Field Is Required</br>";
+	    }
+    
+    	if(!$_POST['content']) {
+        	$error .="The Content Field Is Required</br>";
+    	}
+    
+	    if ($error != "") {
+    	    $error = '<div class="alert alert-danger" role="alert"> <strong> snap!</strong><p>'.$error.'</p></div>';
+    	} else {
+        	sendEmail($error, $success);
+    	}   
+	}
+
+	function sendEmail(&$err, &$suc) {
+        $emailTo = "ctstayte@gmail.com";
+        $subject = $_POST['subject'];
+        $content = $_POST['content'];
+        $headers = "From: ".$_POST['email'];
+        if(mail($emailTo, $subject, $content, $headers)) {
+            $suc = '<div class="alert alert-success" role="alert"><p>Thanks for the message, I\'ll get back to you shortly</p></div>';
+        } else {
+            $err = '<div class="alert alert-danger" role="alert"> <strong>Oh snap!</strong><p>Your message could not be sent. Please try again later.</p></div>';
+        }
+    }
+?>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+
+        <title>Contact me | Chris Stayte</title>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="description" content="Give me a shout!!!">
+
+        <!-- Favicon -->
+        <link rel="icon" href="../img/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon" />
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+        <!-- Custom CSS -->
+        <link href="../css/styles.css" rel="stylesheet">
+        <link href="../css/navbar.css" rel="stylesheet">
+
+        <!-- Font Awesome -->
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+        <!-- Google Font Amiko -->
+        <link href="https://fonts.googleapis.com/css?family=Amiko" rel="stylesheet">
+
+    </head>
+
+    <body>
+        <!-- Page Header -->
+        <div class="bd-pageheader text-xs-center hidden-sm-down">
+
+            <div class="container">
+
+                <h1>Chris Stayte</h1>
+                <p class="lead">Contact Me</p>
+            </div>
+
+        </div>
+
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-toggleable-sm navbar-light bg-navbar" data-toggle="affix">
+
+            <div class="d-flex justify-content-between hidden-md-up">
+
+                <a class="navbar-brand" href="#">Chris Stayte</a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bd-main-nav" aria-controls="bd-main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+            </div>
+
+            <div class="collapse navbar-collapse" id="bd-main-nav">
+                <ul class="nav navbar-nav">
+
+                    <li class="nav-item">
+                        <a class="nav-item nav-link" href="../">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-item nav-link" href="../projects/">Projects</a>
+                    </li>
+
+                    <li class="nav-item active">
+                        <a class="nav-item nav-link active" href="#">Contact Me</a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+        <!-- End Navigation Bar -->
+
+        <!-- Main Content -->
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-block">
+                            <div class="container">
+                                <div class="row hidden-md-up">
+                                    <div class="col-12">
+                                        <div class="text-center" style="margin-top: 25px">
+                                            <h1>Contact Me</h1></div>
+                                    </div>
+                                </div>
+                                <div id="message">
+                                    <? echo $error.$success;?>
+                                </div>
+                                <form method="post">
+                                    <div class="form-group">
+                                        <label for="email">Email address</label>
+                                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter Your Email Address" name="email">
+                                        <small id="emailHelp" class="form-text text-muted">I'll never share your email with anyone else</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="subject">Subject</label>
+                                        <input type="text" class="form-control" id="subject" placeholder="Subject" name="subject">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="content">Tell Me Somethin!</label>
+                                        <textarea class="form-control" id="content" rows="3" name="content"></textarea>
+                                    </div>
+                                    <div class="text-right">
+                                        <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- End Main Content -->
+        
+        <hr class="dashed-divider" style="position: absolute; width: 100%; bottom: 104px;">
+
+        <!-- Footer -->
+        <div class="container-fluid footer">
+            <div <div class="container">
+                <div class="row">
+                    <div class="col-12 text-left">
+                        <a class="btn btn-secondary" href="https://github.com/ChrisStayte" target="_blank" aria-label="Open Github Page" style="background-color: #252626">
+                            <i class="fa fa-inverse fa-github" aria-hidden="true"></i>
+                        </a>
+                        <a class="btn btn-secondary" href="http://stackexchange.com/users/5385621/chris-stayte" target="_blank" aria-label="Open Stack Overflow Page" style="background-color: #195398">
+                            <i class="fa fa-inverse fa-stack-exchange" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <span class="text-muted">© 2017 - Chris Stayte </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Footer -->
+
+        <!-- jQuery first, then Tether, then Bootstrap JS. -->
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+        <script type="text/javascript">
+            $(function() {
+                $("form").submit(function(e) {
+
+
+                    var error = "";
+
+                    if ($("#email").val() == "") {
+                        error += "The Email Field is Required</br>"
+                    }
+
+                    if ($("#subject").val() == "") {
+                        error += "The Subject Field is Required</br>"
+                    }
+
+                    if ($("#content").val() == "") {
+                        error += "The Content Field is Required</br>"
+                    }
+
+                    if (error != "") {
+                        $("#message").html('<div class="alert alert-danger" role="alert"> <strong>Oh snap!</strong><p>' + error + '</p></div>');
+                        return false;
+                    } else {
+                        $("#message").html('');
+                        return true;
+                    }
+                });
+
+            });
+
+        </script>
+
+        <!-- Navbar Setup -->
+        <script src="../js/navbar.js"></script>
+
+        <!-- Google Analytics -->
+        <script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function() {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-75993010-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
+        <!-- End Google Analytics -->
+
+    </body>
+
+    </html>

@@ -1,0 +1,185 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Code Ground</title>
+
+    <!-- JQuery & JQuery UI JS Files -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+    <!-- CSS -->
+    <style type="text/css">
+        body {
+            font-family: sans-serif;
+            padding: 0;
+            margin: 0;
+        }
+        
+        #logo {
+            float: left;
+            font-weight: 400;
+            font-size: 120%;
+            padding: 3px 5px;
+            color: white;
+        }
+        
+        #navigation-bar {
+            width: 99%;
+            background-color: #3F51B5;
+            padding: 5px;
+            height: 30px;
+            z-index: 2;
+            position: relative;
+        }
+        
+        #button-container {
+            width: 250px;
+            margin: 0 auto;
+        }
+        
+        .toggle-button {
+            float: left;
+            border: 1px solid white;
+            padding: 6px;
+            border-right: none;
+            font-size: 90%;
+            color: white;
+        }
+        
+        #html {
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+        
+        #output {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+            border-right: 1px solid white;
+        }
+        
+        .hovered-button {
+            background-color: #616161;
+        }
+        
+        .active {
+            background-color: #424242;
+        }
+        
+        .shadow {
+            box-shadow: 0 4px 4px -2px #232323;
+            -moz-box-shadow: 0 4px 4px -2px #232323;
+            -webkit-box-shadow: 0 4px 4px -2px #2232323;
+        }
+        
+        #body-container {}
+        
+        .panel {
+            float: left;
+            border-color: #424242;
+        }
+        
+        textarea {
+            resize: none;
+            width
+        }
+        
+        iframe {
+            border: none;
+            padding: 0;
+            marging: 0;
+        }
+        
+        .hidden {
+            display: none;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="navigation-bar" class="shadow">
+        <div id="logo"></div>
+
+        <div id="button-container">
+            <div id="html" class="toggle-button active">HTML</div>
+            <div id="css" class="toggle-button">CSS</div>
+            <div id="javascript" class="toggle-button">Javascript</div>
+            <div id="output" class="toggle-button active">Output</div>
+        </div>
+    </div>
+    <div id="body-container">
+        <textarea id="html-panel" class="panel">Hello World</textarea>
+        <textarea id="css-panel" class="panel hidden"></textarea>
+        <textarea id="javascript-panel" class="panel hidden"></textarea>
+        <iframe id="output-panel" class="panel"></iframe>
+    </div>
+
+
+    <script type="text/javascript ">
+        // JQuery Here
+        $(function() {
+            //Init Page
+            setLogo();
+            resizePanelArea();
+            generatePage();
+
+
+            // Change button backgroung on hover
+            $(".toggle-button").hover(function() {
+                $(this).addClass("hovered-button");
+            }, function() {
+                $(this).removeClass("hovered-button")
+            });
+
+
+            // Toggle Panels
+            $(".toggle-button").click(function() {
+                $(this).toggleClass("active");
+
+                var panelID = $(this).attr("id") + "-panel";
+                $("#" + panelID).toggleClass("hidden");
+                resizePanelArea();
+            })
+
+            // Auto Update Logo on Page Resize
+            $(window).resize(function() {
+                setLogo();
+                resizePanelArea();
+            });
+
+            // Change Logo Depending on Page Width
+            function setLogo() {
+                if ($("body").width() <= 450) {
+                    $("#logo").html("CG");
+                } else {
+                    $("#logo").html("CodeGround");
+                }
+            }
+
+            // Resize Panel Area
+            function resizePanelArea() {
+                visiblePanels = $(".active").length
+                $(".panel").height($(window).outerHeight() - $("#navigation-bar").outerHeight() - 5);
+                $(".panel").width(($(window).width() / visiblePanels) - 5);
+            }
+
+            // Sync Page to iFrame
+            function generatePage() {
+                $("#output-panel").contents().find("html").html("<html><head><style type='text/css'>" + $("#css-panel").val() + "</style></head><body>" + $("#html-panel").val() + "</body></html>");
+
+                document.getElementById("output-panel").contentWindow.eval($("#javascript-panel").val());
+            }
+
+            // Detech Changes in HTML Panel and Update iFrame
+            $(".panel").on("change keyup paste", function() {
+                generatePage();
+            });
+        });
+
+    </script>
+</body>
+
+</html>
