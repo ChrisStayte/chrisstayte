@@ -1,0 +1,21 @@
+#shape {
+    width: 200px;
+    height: 200px;
+    background-color: red;
+    display: none;
+    position: relative;
+}
+body {
+    font-family: "sans-serif";
+}
+.bold {
+    font-weight: bold;
+    float: left;
+    padding-left: 20px;
+}
+.game-bounds {
+    width: 800px;
+    height: 800px;
+    border: 2px solid black;
+    margin: 0 auto;
+}
