@@ -1,44 +1,3 @@
-<?php
-   	$error = '';
-    $success = '';
-	if ($_POST) {
-    	$error = '';
-    	$success = '';
-        
-    	if(!$_POST['email']) {
-        	$error .="The Email Field Is Required</br>";
-	    } else if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) === false) {
-    	    $error .="The Email Address Is Not Valid</br>";
-	    }
-    
-    
-    	if(!$_POST['subject']) {
-        	$error .="The Subject Field Is Required</br>";
-	    }
-    
-    	if(!$_POST['content']) {
-        	$error .="The Content Field Is Required</br>";
-    	}
-    
-	    if ($error != "") {
-    	    $error = '<div class="alert alert-danger" role="alert"> <strong> snap!</strong><p>'.$error.'</p></div>';
-    	} else {
-        	sendEmail($error, $success);
-    	}   
-	}
-
-	function sendEmail(&$err, &$suc) {
-        $emailTo = "ctstayte@gmail.com";
-        $subject = $_POST['subject'];
-        $content = $_POST['content'];
-        $headers = "From: ".$_POST['email'];
-        if(mail($emailTo, $subject, $content, $headers)) {
-            $suc = '<div class="alert alert-success" role="alert"><p>Thanks for the message, I\'ll get back to you shortly</p></div>';
-        } else {
-            $err = '<div class="alert alert-danger" role="alert"> <strong>Oh snap!</strong><p>Your message could not be sent. Please try again later.</p></div>';
-        }
-    }
-?>
     <!DOCTYPE html>
     <html lang="en">
 
@@ -132,7 +91,7 @@
                                 <div id="message">
                                     <? echo $error.$success;?>
                                 </div>
-                                <form method="post">
+                                <form method="post" name="contact me" data-netlify="true">
                                     <div class="form-group">
                                         <label for="email">Email address</label>
                                         <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter Your Email Address" name="email">
@@ -159,7 +118,7 @@
 
         </div>
         <!-- End Main Content -->
-        
+
         <hr class="dashed-divider" style="position: absolute; width: 100%; bottom: 104px;">
 
         <!-- Footer -->
